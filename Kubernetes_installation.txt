@@ -1,0 +1,107 @@
+step 1. Azure cli install(installing Azure CLI from Command Prompt)
+
+winget install -e --id Microsoft.AzureCLI
+
+step 2.
+az login
+
+error :-> 
+Retrieving tenants and subscriptions for the selection...
+Authentication failed against tenant 43fd70c9-9c52-4f09-b17d-3efe5a441b33 'Default Directory': SubError: basic_action V2Error: invalid_grant AADSTS50076: Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access '797f4846-ba00-4fd7-ba43-dac1f8f63013'. Trace ID: 9240668c-968e-41e3-818e-b1a4c2544300 Correlation ID: 3776ae11-6f59-4c56-9260-ad8754eafa07 Timestamp: 2026-10-07 11:33:23Z. Status: Response_Status.Status_InteractionRequired, Error code: 3399614476, Tag: 557973645
+If you need to access subscriptions in the following tenants, please use `az login --tenant TENANT_ID`.
+43fd70c9-9c52-4f09-b17d-3efe5a441b33 'Default Directory'
+No subscriptions found for akankshagawale99@outlook.com.
+
+C:\Windows\System32>az login
+Select the account you want to log in with. For more information on login with Azure CLI, see https://go.microsoft.com/fwlink/?linkid=2271136
+
+Retrieving tenants and subscriptions for the selection...
+Authentication failed against tenant 43fd70c9-9c52-4f09-b17d-3efe5a441b33 'Default Directory': SubError: basic_action V2Error: invalid_grant AADSTS50076: Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access '797f4846-ba00-4fd7-ba43-dac1f8f63013'. Trace ID: 9240668c-968e-41e3-818e-b1a4c2544300 Correlation ID: 3776ae11-6f59-4c56-9260-ad8754eafa07 Timestamp: 2026-10-07 11:33:23Z. Status: Response_Status.Status_InteractionRequired, Error code: 3399614476, Tag: 557973645
+If you need to access subscriptions in the following tenants, please use `az login --tenant TENANT_ID`.
+43fd70c9-9c52-4f09-b17d-3efe5a441b33 'Default Directory'
+No subscriptions found for akankshagawale99@outlook.com.
+
+step 3.
+az login --tenant 43fd70c9-9c52-4f09-b17d-3efe5a441b33 --use-device-code
+
+step 4.
+
+az aks install-cli
+
+output : Merged "GitalyTestCluster" as current context in C:\Users\Admin\.kube\config
+
+
+step 5.
+Set the cluster subscription
+
+az account set --subscription 6eff74d5-2e2a-4d2d-a08e-c96bcf76bcc8
+
+
+step 6.
+
+az aks get-credentials --resource-group kubernetesRG --name GitalyTestCluster --overwrite-existing
+
+
+stpe 7.
+
+go to the path 
+ C:\Users\Admin\.kube\config
+
+use dir to list content
+
+to list file:
+>dir /a
+
+>dir /b
+
+step 8.
+
+type config (To get content of config)
+
+step 9.
+C:\Users\Admin>cd .azure-kubectl
+
+C:\Users\Admin\.azure-kubectl>kubectl get nodes
+E1007 18:13:10.227860   21636 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io:443/api?timeout=32s\": dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host"
+E1007 18:13:10.234938   21636 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io:443/api?timeout=32s\": dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host"
+E1007 18:13:10.236934   21636 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io:443/api?timeout=32s\": dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host"
+E1007 18:13:10.238131   21636 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io:443/api?timeout=32s\": dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host"
+E1007 18:13:10.239359   21636 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io:443/api?timeout=32s\": dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host"
+Unable to connect to the server: dial tcp: lookup gitalytestcluster-dns-406mf7a1.260d88f1-6bdc-4b5c-a430-63959705a313.privatelink.centralindia.azmk8s.io: no such host
+
+C:\Users\Admin\.azure-kubectl>az aks command invoke --resource-group kubernetesRG --name GitalyTestCluster --command "kubectl get nodes"
+command started at 2026-10-07 12:45:36+00:00, finished at 2026-10-07 12:45:36+00:00 with exitcode=0
+NAME                                STATUS   ROLES    AGE     VERSION
+aks-agentpool-73288997-vmss000000   Ready    <none>   3h50m   v1.35.8
+
+
+C:\Users\Admin\.azure-kubectl>az aks command invoke --resource-group kubernetesRG --name GitalyTestCluster --command "kubectl get pods"
+command started at 2026-10-07 12:49:03+00:00, finished at 2026-10-07 12:49:04+00:00 with exitcode=0
+No resources found in default namespace.
+
+
+------------------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+echo 'apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80'pod.yaml
+
+
