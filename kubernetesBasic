@@ -69,3 +69,29 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.0.0.1       <none>        443/TCP   3h45m
 my-service   ClusterIP   10.0.114.233   <none>        80/TCP    45s
 
+
+
+[Service :  deployment]
+
+C:\Users\Admin\.azure-kubectl>kubectl get pods -o wide
+NAME                          READY   STATUS    RESTARTS   AGE     IP             NODE                            NOMINATED NODE   READINESS GATES
+vrit-nginx-5c59dd7ddd-2mnd6   1/1     Running   0          81m     10.244.1.162   aks-node2-22653311-vmss000000   <none>           <none>
+vrit-nginx-5c59dd7ddd-67x6l   1/1     Running   0          81m     10.244.1.127   aks-node2-22653311-vmss000000   <none>           <none>
+vrit-nginx-5c59dd7ddd-69d2x   1/1     Running   0          81m     10.244.1.190   aks-node2-22653311-vmss000000   <none>           <none>
+webserver                     1/1     Running   0          3h22m   10.244.1.246   aks-node2-22653311-vmss000000   <none>           <none>
+
+C:\Users\Admin\.azure-kubectl>kubectl get endpoints
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME           ENDPOINTS                                         AGE
+kubernetes     4.224.73.173:443                                  4h
+my-service     <none>                                            16m
+vrit-service   10.244.1.127:80,10.244.1.162:80,10.244.1.190:80   61s
+
+
+C:\Users\Admin\.azure-kubectl>kubectl get svc
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes     ClusterIP   10.0.0.1       <none>        443/TCP   4h10m
+my-service     ClusterIP   10.0.114.233   <none>        80/TCP    26m
+vrit-service   ClusterIP   10.0.19.99     <none>        80/TCP    11m
+
+
