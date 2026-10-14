@@ -46,3 +46,26 @@ spec:
         - containerPort: 80
 
 
+Service:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vrit-service
+spec:
+  selector:
+    env: prod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+C:\Users\Admin\.azure-kubectl>kubectl create -f service.yaml
+C:\Users\Admin\.azure-kubectl>dir *yaml
+C:\Users\Admin\.azure-kubectl>kubectl get pods -o wide
+C:\Users\Admin\.azure-kubectl>kubectl get svc
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.0.0.1       <none>        443/TCP   3h45m
+my-service   ClusterIP   10.0.114.233   <none>        80/TCP    45s
+
