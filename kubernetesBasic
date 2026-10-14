@@ -1,1 +1,48 @@
+Create file on windows CMD : notepad sample-pod.yaml
+
+list the content : dir *.yaml  
+dir sample-pod.yaml     :: check a specific file
+dir *.yaml              :: list only YAML files
+dir /a                  :: include hidden files
+dir /b                  :: names only, no extra details
+dir /s                  :: include subfolders
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+C:\Users\Admin\.azure-kubectl>notepad sample-pod.yaml
+
+C:\Users\Admin\.azure-kubectl>kubectl create -f sample-pod.yaml
+pod/vrit-pod created
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+
 
