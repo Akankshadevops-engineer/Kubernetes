@@ -93,7 +93,7 @@ NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes     ClusterIP   10.0.0.1       <none>        443/TCP   4h10m
 my-service     ClusterIP   10.0.114.233   <none>        80/TCP    26m
 vrit-service   ClusterIP   10.0.19.99     <none>        80/TCP    11m
-
+--------------------------------------------------------------------------------------------------
 Service(Loadbalancer added)
 
 apiVersion: v1
@@ -110,3 +110,59 @@ spec:
   type: LoadBalancer
 
 
+C:\Users\Admin>kubectl get svc
+NAME           TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)        AGE
+kubernetes     ClusterIP      10.0.0.1      <none>           443/TCP        49m
+vrit-service   LoadBalancer   10.0.130.88   20.204.229.109   80:32532/TCP   33m  (public Ip Added)
+                                                                 |
+                                                                Node port Number
+---------------------------------------------------------------------------------------------------------
+** Add service under deployement ->
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vrit-deployment
+  labels:
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vrit-service
+spec:
+  selector:
+    env: proddev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+
+
+C:\Users\Admin>kubectl get endpoints
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME           ENDPOINTS          AGE
+kubernetes     20.207.78.14:443   102m
+vrit-service   <none>             86m 
+
+now you will see service is not talking to deployment
+
+---------------------------------------------------------------------------------------
