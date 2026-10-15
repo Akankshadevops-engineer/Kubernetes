@@ -69,7 +69,7 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.0.0.1       <none>        443/TCP   3h45m
 my-service   ClusterIP   10.0.114.233   <none>        80/TCP    45s
 
-
+[for  deplyement and service yaml please refer to yaml on overview page]
 
 [Service :  deployment]
 
@@ -93,5 +93,20 @@ NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes     ClusterIP   10.0.0.1       <none>        443/TCP   4h10m
 my-service     ClusterIP   10.0.114.233   <none>        80/TCP    26m
 vrit-service   ClusterIP   10.0.19.99     <none>        80/TCP    11m
+
+Service(Loadbalancer added)
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vrit-service
+spec:
+  selector:
+    env: prod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
 
 
